@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        var ws = new WebSocket('ws://192.168.1.19:8081/ggb-exchange-demo/ws');
+            
+        let div = document.querySelector('.box');
+
+        ws.open = () => {
+            ws.send('发送数据...')
+            console.log('数据发送中....')
+            div.innerHTML = ''
+        }
+
+        ws.onmessage = function(e) {
+            let data = {};
+            data = e.data.replace('"','').replace(/[\\]/g,'');
+            
+            // console.log(JSON.parse(data))
+            div.innerHTML = data
+        }
+
+        ws.onclose = () => {
+            console.log('链接已关闭...')
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Document</title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+</head>
+<style>
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.loginBox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url('https://res.wx.qq.com/a/wx_fed/webwx/res/static/img/2zrdI1g.jpg');
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login{
+    width: 320px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    top: 30%;
+    margin-left: -160px;
+}
+.login h3{
+    text-align: center;
+    font-size: 24px;
+    color: #666;
+}
+.login input{
+    width: 254px;
+    padding: 10px;
+    margin: 10px 0 30px;
+}
+
+.avatarList ul{
+    width: 300px;
+    padding: 5px;
+}
+.avatarList ul li{
+    display: inline-block;
+    margin: 8px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+.avatarList ul li img{
+    display: block;
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+}
+.avatarList ul .activeLi{
+    border-color: red;
+}
+.btn{
+    width: 100%;
+    background-color: #64aaf7;
+    border: none;
+    padding: 10px 0;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chartWrap{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.chartBox{
+    width: 100%;
+    height: 100%;
+}
+.leftBox{
+    background: #999999;
+    flex:0 0 250px;
+    height:100%;
+}
+.rightBox{
+    flex: 1;
+    height: 100%;
+    background: #f4f4f4;
+}
+.userInfo{
+    padding: 10px 25px;
+}
+.userInfo img{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+}
+.userInfo span{
+    display: inline-block;
+    line-height: 35px;
+    vertical-align: top;
+    margin-left: 15px;
+}
+.rightBox .title{
+    padding: 32px 0;
+    text-align: center;
+    font-size: 20px;
+    color: #444;
+    border-bottom: 1px solid #999;
+}
+.othersContent{
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.othersContent img{
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.othersContent .contentBox{
+    width: calc(100% - 60px);
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    position: relative;
+    margin-left: 5px;
+}
+.myContent{
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.myContent img{
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.myContent .contentBox{
+    width: calc(100% - 60px);
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    position: relative;
+    margin-left: 5px;
+}
+.info p{
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 13px;
+}
+.info span{
+    background: #fff;
+    padding: 5px 5px 5px 10px ;
+    border-radius: 4px;
+}
+.contentBox .jt{
+    position: absolute;
+    width: 0; 
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    transform: rotate(90deg); /*顺时针旋转90°*/
+}
+.othersContent .jt{
+    top: 31px;
+    left: -5px;
+    border-color: #fff transparent transparent transparent;
+}
+.myContent .jt{
+    top: 22px;
+    right: -5px;
+    border-color:transparent transparent  #96b97d transparent;
+}
+.myContent .info{
+    text-align: right;
+    margin-top: 12px;
+}
+.myContent .info span{
+    text-align: right;
+    background: #96b97d;
+}
+.myContent .info img{
+    text-align: right;
+    background: #96b97d;
+    width: auto;
+    height: auto;
+    padding: 5px ;
+    border-radius: 4px;
+    margin-top: 0;
+}
+.othersContent .info img{
+    text-align: right;
+    background: #96b97d;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    border-radius: 4px;
+    margin-top: 0;
+}
+.addUserBox p{
+    margin-top: 20px;
+    color: #999;
+    text-align: center;
+    font-size: 12px;
+}
+.userList h2{
+    padding: 20px;
+    color: #444;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+.chartArea{
+    height: 200px;
+    box-sizing: border-box;
+}
+.chartArea{
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+.topBar{
+    height: 30px;
+}
+.chartArea textarea{
+    background: none;
+    width: calc(100% - 40px);
+    line-height: 24px;
+    margin: 0 20px;
+    outline: none;
+    font-size: 20px;
+    border: none;
+    resize: none;
+}
+.chartArea button{
+    float: right;
+    margin-right: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 4px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+.rightTop{
+    height: calc(100% - 395px);
+    overflow: auto;
+    margin-bottom: 30px;
+}
+.topTitle > p{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+.barBox{
+    padding: 10px ;
+}
+.barBox a{
+    display: inline-block;
+}
+.file label{
+    width: 35px;
+    display: block;
+    background: url(https://www.easyicon.net/api/resizeApi.php?id=1195217&size=32) no-repeat center;
+    height: 35px;
+    cursor: pointer;
+}
+.face{
+    width: 35px;
+    display: block;
+    background: url(https://www.easyicon.net/api/resizeApi.php?id=1178652&size=32) no-repeat center;
+    height: 35px;
+    cursor: pointer;
+}
+</style>
+<body>
+    <div class="loginBox" >
+        <div class="login">
+            <h3>IM</h3>
+            <input type="text" placeholder="请输入昵称">
+            <div class="avatarList">
+                <span>请选择头像</span>
+                <ul>
+                    <li class="activeLi">
+                        <img src="./public/imgs/1.jpeg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/2.jpeg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/3.jpeg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/4.jpeg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/5.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/6.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/7.jpeg" alt="">
+                    </li>
+                    <li>
+                        <img src="./public/imgs/8.jpeg" alt="">
+                    </li>
+                </ul>
+                <button class="btn">登录</button>
+            </div>
+        </div>
+    </div>
+    <div class="chartBox"  style="display: none">
+        <div class="chartWrap">
+            <div class="leftBox">
+                    <div class="userInfo" style="border-bottom: 1px solid #ddd;padding:25px;">
+                        <img class="myAvat" src="https://b-ssl.duitang.com/uploads/item/201804/05/20180405231344_snjko.jpg" alt="">
+                        <span class="myName">团成员</span>
+                    </div>
+                    <div class="userList">
+                        <h2>群成员</h2>
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rightBox">
+                    <div class="title">
+                        群聊( <span></span> )
+                    </div>
+                    <div class="rightTop">
+                    </div>
+
+                    <!-- 输入聊天区域 -->
+                    <div class="chartArea">
+                        <div class="barBox">
+                            <a title="表情" class="face"></a>
+                            <a title="裁剪">
+                                <label for=""></label>
+                            </a>
+                            <a title="图片" href="javascripr:;" class="file">
+                                <label for="file"></label>
+                                <input type="file" id="file" style="display: none">
+                            </a>
+                        </div>
+                        <div class="formBox">
+                            <textarea  rows="5"></textarea>
+                            <button>发送</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(document).ready(function(){
+            var socket = io.connect('http://192.168.1.20:8081');
+
+            let userName = "",avatar = ""
+
+            $('.avatarList li').click(function(){
+                $(this).addClass('activeLi').siblings().removeClass('activeLi')
+            })
+            function scrollIntoView(){
+                $(".rightTop > div").children(':last').get(0).scrollIntoView(false)
+            }
+
+            $('.btn').click(function(){
+                let userName = $('input').val().trim();
+                let img = $('.activeLi img').attr('src')
+                socket.emit('login',{
+                    userName:userName,
+                    avatar:img
+                })
+            })
+
+            // 判断客户端是否登录成功
+            socket.on('loginErr',data =>{
+                console.log('登录失败,用户已被登录')
+                alert('登录失败,用户已被登录')
+            });
+            socket.on('loginSucces',data => {
+                console.log('登录成功')
+                $('.loginBox').css('display',"none")
+                $('.chartBox').css('display',"block")
+
+                $('.myAvat').attr('src',data.avatar);
+                $('.myName').text(data.userName)
+
+                userName = data.userName;
+                avatar = data.avatar
+            })
+
+            //监听是否有人加入群聊
+            socket.on('addUser',data =>{
+                console.log("有人加进来了")
+                $('.rightTop').append(`
+                    <div class="topTitle">
+                        <p>${data.userName}进入群聊</p>
+                    </div>
+                `)
+                scrollIntoView()
+            })
+
+            //监听用户列表
+            socket.on('userItem',data => {
+                console.log(data)
+                $('.userList ul').html('');
+                $('.title span').text(data.length);
+                data.forEach((item)=>{
+                    $('.userList ul').append(`
+                        <li>
+                            <div class="userInfo">
+                                <img src="${item.avatar}" alt="">
+                                <span>${item.userName}</span>
+                            </div>
+                        </li>
+                    `)
+                })
+            })
+            
+            //监听是否有人离开群聊
+            socket.on('dtlUser',data =>{
+                console.log("有人离开了")
+                $('.rightTop').append(`
+                    <div class="topTitle">
+                        <p>${data.userName}离开群聊</p>
+                    <div>
+                `)
+                scrollIntoView()
+            })
+
+            //发送消息
+            $('.formBox button').on('click',()=>{
+                let content = $(".formBox textarea").val()
+                $(".formBox textarea").val('')
+                if(!content){}else{
+                    socket.emit('sendMsg',{
+                        msg:content,
+                        userName:userName,
+                        avatar:avatar
+                    })
+                }
+            })
+
+
+            //监听聊天记录
+            socket.on('receiveMsg',data => {
+                if(data.userName === userName){
+                    $('.rightTop').append(`
+                    <div class="myContent">
+                            <div class="contentBox">
+                                <div class="jt"></div>
+                                <div class="info">
+                                    <span>${data.msg}</span>
+                                </div>
+                            </div>
+                        <img src="${data.avatar}" alt="">
+                    </div>
+                    `)
+                }else{
+                    $('.rightTop').append(`
+                        <div class="othersContent">
+                            <img src="${data.avatar}" alt="">
+                            <div class="contentBox">
+                                <div class="jt"></div>
+                                <div class="info">
+                                    <p>${data.userName}</p>
+                                    <span>${data.msg}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `)
+                }
+                scrollIntoView()
+            })
+
+            //发送图片
+            $('#file').on('change',function(){
+                let file = this.files[0];
+
+                //发送文件去服务器
+                let fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(){
+                    socket.emit("sendImg",{
+                        userName:userName,
+                        avatar:avatar,
+                        img:fr.result
+                    })
+                }
+            })
+
+            // 监听图片聊天信息
+            socket.on('receiveImg',data => {
+                if(data.userName === userName){
+                    $('.rightTop').append(`
+                    <div class="myContent">
+                            <div class="contentBox">
+                                <div class="jt"></div>
+                                <div class="info sendImg">
+                                    <img src="${data.img}"> 
+                                </div>
+                            </div>
+                        <img src="${data.avatar}" alt="">
+                    </div>
+                    `)
+                }else{
+                    $('.rightTop').append(`
+                        <div class="othersContent">
+                            <img src="${data.avatar}" alt="">
+                            <div class="contentBox">
+                                <div class="jt"></div>
+                                <div class="info sendImg">
+                                    <p>${data.userName}</p>
+                                    <img src="${data.img}">
+                                </div>
+                            </div>
+                        </div>
+                    `)
+                }
+                $('.sendImg>img:last').on('load',function(){
+                    console.log("图片加载完成")
+                    scrollIntoView()
+                })
+            })
+        });
+        
+    </script>
+</body>
+</html>
