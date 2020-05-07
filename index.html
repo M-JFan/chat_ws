@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>IM</title>
     <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 </head>
 <style>
@@ -367,7 +367,7 @@ html,body{
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(document).ready(function(){
-            var socket = io.connect('http://192.168.1.20:8081');
+            var socket = io.connect('http://localhost:8081');
 
             let userName = "",avatar = ""
 
@@ -381,6 +381,7 @@ html,body{
             $('.btn').click(function(){
                 let userName = $('input').val().trim();
                 let img = $('.activeLi img').attr('src')
+                /* 给浏览器发送数据 */
                 socket.emit('login',{
                     userName:userName,
                     avatar:img
