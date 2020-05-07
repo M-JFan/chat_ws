@@ -11,9 +11,9 @@ npm install / yarn
 `
 node ./app.js
 `  
-
 服务器启动之后，在浏览器输入  
 `
 localhost:8081
 `
-
+## 开发计划
+后期将转到vue或者react框架上，并且实现线上聊天。 
